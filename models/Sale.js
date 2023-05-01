@@ -7,6 +7,9 @@ const saleSchema = new mongoose.Schema({
   address: String,
   location: String,
   apartments: [{}],
+  buildingType: String,
+  floors: Number,
+  numberOfApartments: Number,
 });
 
 const Sale = mongoose.model("Sale", saleSchema);
