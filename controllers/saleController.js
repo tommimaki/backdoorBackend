@@ -20,3 +20,15 @@ exports.getSaleById = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch sale" });
   }
 };
+
+exports.getAllApartments = async (req, res) => {
+  try {
+    const sales = await Sale.find({});
+    const apartments = sales.reduce((apartmentList, sale) => {
+      return [...apartmentList, ...sale.apartments];
+    }, []);
+    res.json(apartments);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch apartments" });
+  }
+};
