@@ -32,3 +32,27 @@ exports.getAllApartments = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch apartments" });
   }
 };
+
+exports.getApartmentById = async (req, res) => {
+  try {
+    const { apartmentId } = req.params;
+    const sales = await Sale.find({});
+
+    const apartment = sales.reduce((foundApartment, sale) => {
+      if (foundApartment) return foundApartment;
+
+      const found = sale.apartments.find(
+        (apartment) => apartment._id.toString() === apartmentId
+      );
+      return found || null;
+    }, null);
+
+    if (apartment) {
+      res.json(apartment);
+    } else {
+      res.status(404).json({ error: "Apartment not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch apartment" });
+  }
+};
