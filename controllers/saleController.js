@@ -94,3 +94,49 @@ exports.getApartmentById = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch apartment" });
   }
 };
+
+// Add new sale
+exports.createSale = async (req, res) => {
+  try {
+    const saleData = req.body;
+    const newSale = new Sale(saleData);
+    await newSale.save();
+
+    res.status(201).json(newSale);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create sale" });
+  }
+};
+
+// Update existing sale
+exports.updateSale = async (req, res) => {
+  try {
+    const saleData = req.body;
+    const updatedSale = await Sale.findByIdAndUpdate(req.params.id, saleData, {
+      new: true,
+    });
+
+    if (updatedSale) {
+      res.status(200).json(updatedSale);
+    } else {
+      res.status(404).json({ error: "Sale not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update sale" });
+  }
+};
+
+// Delete sale
+exports.deleteSale = async (req, res) => {
+  try {
+    const deletedSale = await Sale.findByIdAndDelete(req.params.id);
+
+    if (deletedSale) {
+      res.status(200).json({ success: true });
+    } else {
+      res.status(404).json({ error: "Sale not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete sale" });
+  }
+};
