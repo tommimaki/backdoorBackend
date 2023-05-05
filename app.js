@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const siteRoutes = require("./routes/siteRoutes");
 const saleRoutes = require("./routes/saleRoutes");
+const newsletterRoutes = require("./routes/newsletterRoutes");
 
 const app = express();
 app.use(cors());
@@ -13,6 +14,7 @@ const url = process.env.MONGO_DB_URI;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use("/api", siteRoutes);
 app.use("/api", saleRoutes);
+app.use("/api", newsletterRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
