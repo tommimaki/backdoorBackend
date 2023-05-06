@@ -6,6 +6,7 @@ const siteRoutes = require("./routes/siteRoutes");
 const saleRoutes = require("./routes/saleRoutes");
 const newsletterRoutes = require("./routes/newsletterRoutes");
 const s3Route = require("./routes/s3Route");
+const visitRequestRoute = require("./routes/visitRequestRoutes");
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ app.use("/api", siteRoutes);
 app.use("/api", saleRoutes);
 app.use("/api", newsletterRoutes);
 app.use("/api", s3Route);
+app.use("/api", visitRequestRoute);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
