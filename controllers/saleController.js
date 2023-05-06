@@ -97,6 +97,7 @@ exports.getApartmentById = async (req, res) => {
 
 // Add new sale
 exports.createSale = async (req, res) => {
+  console.log("Post running");
   try {
     const saleData = req.body;
     const newSale = new Sale(saleData);
