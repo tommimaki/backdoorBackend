@@ -3,7 +3,7 @@ const { PutObjectCommand, S3Client } = require("@aws-sdk/client-s3");
 const fs = require("fs");
 const mime = require("mime-types");
 
-const bucketName = "takaovi-admin";
+const bucketName = process.env.AWS_BUCKET_NAME;
 
 exports.handleImageUpload = async (req, res) => {
   const form = new multiparty.Form();
@@ -16,7 +16,7 @@ exports.handleImageUpload = async (req, res) => {
   });
 
   const client = new S3Client({
-    region: "eu-north-1",
+    region: process.env.AWS_REGION,
     credentials: {
       accessKeyId: process.env.S3_ACCESS_KEY,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,

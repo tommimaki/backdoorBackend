@@ -5,6 +5,7 @@ const cors = require("cors");
 const siteRoutes = require("./routes/siteRoutes");
 const saleRoutes = require("./routes/saleRoutes");
 const newsletterRoutes = require("./routes/newsletterRoutes");
+const s3Route = require("./routes/s3Route");
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use("/api", siteRoutes);
 app.use("/api", saleRoutes);
 app.use("/api", newsletterRoutes);
+app.use("/api", s3Route);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
