@@ -1,4 +1,4 @@
-const UserRole = require("../models/UserRole");
+const UserRole = require("../models/userRole");
 
 // Get user role by UID
 exports.getUserRoleByUid = async (req, res) => {
